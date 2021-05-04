@@ -1,0 +1,111 @@
+﻿@model RssFeeder.Controllers.RSSController
+@{
+    ViewBag.Title = "Index";
+}
+
+
+<br />
+<h2>RSS Feed Reader</h2>
+<hr />
+<br />
+<style>
+    table {
+        width: 100%;
+    }
+
+    divClass {
+        max-width: 1000px;
+    }
+
+    img {
+        width: 60%;
+        height: 60%;
+    }
+
+    .Buttondiv {
+        margin: 10px
+    }
+</style>
+@using (Html.BeginForm())
+{
+
+    <input type="URL" name="RSSURL" placeholder="Enter RSS Feed URL Here..." class="form-control" value="@ViewBag.URL" style="min-width:100%" />
+
+    <br />
+
+
+    <div class="Buttondiv">
+        <table class="table table-hover">
+            @if (RssFeeder.Controllers.RSSController.position == "Format with tags")
+            {
+                <tr>
+                    <th><input type="radio" name="format" value="Format with tags" checked />Форматировать с тегами</th>
+                    <th>Время обновления<input type="text" name="timeUpdate" style="min-width: 10%" /></th>
+                </tr>
+                <tr>
+                    <th><input type="radio" name="format" value="Format without tags" />Без форматирования по тегам</th>
+                </tr>
+            }
+            else
+
+            {
+                <tr>
+                    <th><input type="radio" name="format" value="Format with tags" />Форматировать с тегами</th>
+                    <th>Время обновления<input type="text" name="timeUpdate" style="min-width: 10%" /></th>
+                </tr>
+                <tr>
+                    <th><input type="radio" name="format" value="Format without tags" checked />Без форматирования по тегам</th>
+                </tr>
+            }
+
+        </table>
+    </div>
+    <input type="submit" class="btn btn-danger" />
+
+}
+@{
+    ViewBag.Title = "Index";
+}
+@using (Html.BeginForm())
+{
+
+}
+
+<div class="divClass">
+
+    <asp:UpdatePanel>
+        <table class="table table-hover">
+            <thead>
+                <tr>
+                    <th>Title</th>
+                    <th>Description</th>
+                    <th>Publish Date</th>
+                </tr>
+            </thead>
+            <tbody>
+                @if (ViewBag.Item != null)
+                {
+                    foreach (var item in ViewBag.Item)
+                    {
+                        @if (ViewBag.FormatCheck == "Format with tags")
+                        {
+                            <tr>
+                                <td><a href="@item.Link">@item.Title</a></td>
+                                <td>@Html.Raw(item.Description)</td>
+                                <td>@item.PubDate.ToString("yyyy-MM-dd HH:mm")</td>
+                            </tr>
+                        }
+                        else
+                        {
+                            <tr>
+                                <td><a href="@item.Link">@item.Title</a></td>
+                                <td>@item.Description</td>
+                                <td>@item.PubDate.ToString("yyyy-MM-dd HH:mm")</td>
+                            </tr>
+                        }
+                    }
+                }
+            </tbody>
+        </table>
+    </asp:UpdatePanel>
+</div> 

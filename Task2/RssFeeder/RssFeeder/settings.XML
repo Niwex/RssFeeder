@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rsslinks>
+	<newsfeed>
+		<link>https://habr.com/ru/rss/interesting/</link>
+	</newsfeed>
+	
+	<update>
+		3600
+	</update>
+</rsslinks>
+

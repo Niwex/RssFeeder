@@ -1,0 +1,2 @@
+from: some\path.txt 
+to: some\path.txt
